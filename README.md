@@ -27,49 +27,18 @@ Unless mentioned, each image is cross-compiled in s390x, amd64, arm64, and ppc64
 
 ### Deployment
 
-There are three diferent kustomizations: fyre, multi, multi-hpa. multi-hpa is a HoriztonalPodAutoScaler version where the front-end autoscales.
+*X86 or Multi-Arch Compute(MAC)* 
 
-*fyre* 
+To deploy to a X86 only or a multiarch compute cluster, use the following:
 
-To deploy to fyre, use the following:
 
-1. Update manifests/overlays/fyre/env.secret with username and password:
-
-```
-username=
-password=
-```
-
-2. Build sock shop for fyre:
-
-```
-❯ kustomize build manifests/overlays/fyre | oc apply -f - 
-```
-
-3. Destroy sock shop for fyre:
-
-```
-❯ kustomize build manifests/overlays/fyre | oc delete -f - 
-```
-
-*multiarch compute*
-
-To deploy to a multiarch compute cluster, use the following:
-
-1. Update manifests/base/env.secret with username and password:
-
-```
-username=
-password=
-```
-
-2. Build sock shop for multi:
+1. Build sock shop :
 
 ```
 ❯ kustomize build manifests/overlays/multi | oc apply -f - 
 ```
 
-3. Destroy sock shop for multi:
+3. Destroy sock shop :
 
 ```
 ❯ kustomize build manifests/overlays/multi | oc delete -f - 
@@ -91,36 +60,12 @@ sock-shop   sock-shop.apps.demo.xyz          front-end   8079   edge/None     No
 
 Have fun and use it.
 
-### Images
-
-The applications are compiled into images that are hosted at [quay.io/repository/powercloud](https://quay.io/repository/powercloud). There is a manifest-listed image for each application in the corresponding sock-shop repository.
-
-To build the images, use: 
-
-*amd64*
+### Scale Front-end Microservice to XX replicas
 
 ```
-ARCH=amd64
-REGISTRY=quay.io/repository/powercloud/sock-shop-${APP}
-make cross-build-amd64
+oc scale deployment/front-end --replicas=xx
 ```
 
-*All other arches*
-
-```
-ARCH=ppc64le
-REGISTRY=quay.io/repository/powercloud/sock-shop-${APP}
-make cross-build-amd64
-```
-
-To push the manifest-listed images, use:
-
-```
-REGISTRY=quay.io/repository/powercloud/sock-shop-${APP}
-ARM_REGISTRY=quay.io/repostiroy/powercloud/sock-shop-${APP}
-APP=front-end
-make push-ml
-```
 ### Diagrams
 
 The architecture is:
@@ -149,9 +94,6 @@ The following custom repos are used:
 
 Please login in via the https route to sock-shop and register a new user.
 
-### Testing the Multiarchitecture Compute
-1. [e2e-test](https://github.com/microservices-demo/e2e-tests)
-2. [load-test](https://github.com/microservices-demo/load-test)
 
 Thank you to the WeaveWorks team and supporters.
 
