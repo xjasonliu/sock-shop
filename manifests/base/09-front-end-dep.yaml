@@ -22,10 +22,10 @@ spec:
           args: [ "start" ]
           resources:
             limits:
-              cpu: 300m
+              cpu: 3000m
               memory: 1000Mi
             requests:
-              cpu: 100m
+              cpu: 3000m
               memory: 300Mi
           ports:
             - containerPort: 8079
