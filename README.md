@@ -23,9 +23,17 @@ The purpose of this application is to use a reference microservices demo to show
 
 The `catalogue` and `user` have a built-in wait to READY as the dependent databases are started up.
 
-Unless mentioned, each image is cross-compiled in s390x, amd64, arm64, and ppc64le. The image is manifest-listed.
+### Prerequisites
+
+Install git/oc/kustomize
+
+Clone this repository
+```
+git clone https://github.com/xjasonliu/sock-shop.git
+```
 
 ### Deployment
+
 
 *X86 or Multi-Arch Compute(MAC)* 
 
@@ -35,13 +43,30 @@ To deploy to a X86 only or a multiarch compute cluster, use the following:
 1. Build sock shop :
 
 ```
-❯ kustomize build manifests/overlays/multi | oc apply -f - 
+kustomize build manifests/overlays/multi | oc apply -f - 
 ```
 
 3. Destroy sock shop :
 
 ```
-❯ kustomize build manifests/overlays/multi | oc delete -f - 
+kustomize build manifests/overlays/multi | oc delete -f - 
+```
+
+*Power* 
+
+To deploy to a Power only cluster, use the following:
+
+
+1. Build sock shop :
+
+```
+kustomize build manifests/overlays/power | oc apply -f - 
+```
+
+3. Destroy sock shop :
+
+```
+kustomize build manifests/overlays/power | oc delete -f - 
 ```
 
 ### Using the application
@@ -49,7 +74,7 @@ To deploy to a X86 only or a multiarch compute cluster, use the following:
 1. Get the route to the host
 
 ```
-❯ oc get routes -n sock-shop
+oc get routes -n sock-shop
 NAME        HOST/PORT                                                 PATH   SERVICES    PORT   TERMINATION   WILDCARD
 sock-shop   sock-shop.apps.demo.xyz          front-end   8079   edge/None     None
 ```
