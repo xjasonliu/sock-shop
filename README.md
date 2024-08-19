@@ -42,7 +42,7 @@ cd sock-shop
 
 *X86 or Multi-Arch Compute(MAC)* 
 
-To deploy to a X86 only or a multiarch compute cluster, use the following:
+To deploy to a X86 only or a multiarch compute cluster (if Power is included in the multiarch, Power 9 or later is required), use the following:
 
 
 1. Build sock shop :
@@ -59,7 +59,7 @@ kustomize build manifests/overlays/multi | oc delete -f -
 
 *Power* 
 
-To deploy to a Power only cluster, use the following:
+To deploy to a Power (Power 9 or later) only cluster, use the following:
 
 
 1. Build sock shop :
