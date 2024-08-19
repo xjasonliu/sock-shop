@@ -32,6 +32,11 @@ Clone this repository
 git clone https://github.com/xjasonliu/sock-shop.git
 ```
 
+Change directory to sock-shop
+```
+cd sock-shop
+```
+
 ### Deployment
 
 
